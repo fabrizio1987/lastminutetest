@@ -34,9 +34,10 @@ public class Item {
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
-		result.append(isImported ? "imported " : " ");
-		result.append(" (" + type + ") ");
-		result.append(" " + description + " : ");
+		result.append(" " + quantity);
+		result.append(isImported ? " imported" : " ");		
+		result.append("\t" + description);
+		result.append(" (" + type + ") :\t");
 		if(isProcessed()) {
 			result.append(grossPrice);
 		} else {
@@ -79,9 +80,6 @@ public class Item {
 
 	public String getDescription() {
 		return description;
-	}
-	public double getPrice() {
-		return netPrice;
 	}
 	public int getQuantity() {
 		return quantity;

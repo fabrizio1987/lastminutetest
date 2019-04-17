@@ -2,6 +2,8 @@ package lastminute;
 
 public class Rules {
 	
+	//può diventare singleton
+	
 	private final static double salesTaxRate = 0.1;
 	private final static double importTaxRate = 0.05;
 	private final static double exemptTaxRate = 0;

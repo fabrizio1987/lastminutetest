@@ -15,6 +15,10 @@ public class Receipt {
 	public Receipt() {
 		itemList = new LinkedList<Item>();
 	}
+	
+	public void addItem(Item item) {
+		itemList.add(item);
+	}
 
 	public List<Item> getItemList() {
 		return itemList;
@@ -57,12 +61,12 @@ public class Receipt {
 		int count = 1;
 		for (Item i : itemList) {
 			result.append(count++);
-			result.append(" " + i.toString());
+			result.append(") " + i.toString());
 		}
 
 		if (isProcessed()) {
 			result.append("\nSales Taxes = " + salesTaxes);
-			result.append("\nTotal Amount =" + totalAmount);
+			result.append("\nTotal Amount = " + totalAmount);
 		}
 		return result.toString();
 	}
