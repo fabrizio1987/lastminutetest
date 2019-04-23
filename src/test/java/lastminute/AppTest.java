@@ -1,43 +1,19 @@
 package lastminute;
 
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class AppTest {
 
-	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
-	@Before
-	public void setUpStreams() {
-		System.setOut(new PrintStream(outContent));
-	}
-
-	@Test
-	public void testAppConstructor() {
-		try {
-			new App();
-		} catch (Exception e) {
-			fail("Construction failed.");
-		}
-	}
-
-	@Test
-	public void testAppMain() {
-		App.main(null);
-		try {
-			assertEquals("Hello World!" + System.getProperty("line.separator"), outContent.toString());
-		} catch (AssertionError e) {
-			fail("\"message\" is not \"Hello World!\"");
-		}
-	}
+public class AppTest {	
 	
+
+	static final Logger LOGGER = LoggerFactory.getLogger(AppTest.class);
 	
 	@Test
 	public void testReceipt1() {
+		
 		
 		ReceiptService service = new ReceiptService(); 
 		
@@ -49,11 +25,11 @@ public class AppTest {
 		receipt.addItem(i2);
 		receipt.addItem(i3);
 		
-		System.out.println(receipt);
+		LOGGER.info("Input\n " + receipt.toString());
 		
 		service.processReceipt(receipt);
-		
-		System.out.println(receipt);
+				
+		LOGGER.info("Output\n " + receipt.toString());
 		
 		try {
 			
@@ -76,11 +52,11 @@ public class AppTest {
 		receipt.addItem(i1);
 		receipt.addItem(i2);
 		
-		System.out.println(receipt);
+		LOGGER.info("Input\n " + receipt.toString());
 		
 		service.processReceipt(receipt);
-		
-		System.out.println(receipt);
+				
+		LOGGER.info("Output\n " + receipt.toString());
 		
 		try {
 			assertTrue(receipt.getSalesTaxes() == 7.65);
@@ -105,11 +81,11 @@ public class AppTest {
 		receipt.addItem(i3);
 		receipt.addItem(i4);
 		
-		System.out.println(receipt);
+		LOGGER.info("Input\n " + receipt.toString());
 		
 		service.processReceipt(receipt);
-		
-		System.out.println(receipt);
+				
+		LOGGER.info("Output\n " + receipt.toString());
 		
 		try {
 			assertTrue(receipt.getSalesTaxes() == 6.70);
@@ -119,9 +95,6 @@ public class AppTest {
 		}
 	}
 
-	@After
-	public void cleanUpStreams() {
-		System.setOut(null);
-	}
+
 
 }
