@@ -112,9 +112,8 @@ public class AppTest {
 		System.out.println(receipt);
 		
 		try {
-			assertTrue(1 == 1);
-			//assertTrue(receipt.getSalesTaxes() == 6.70);
-			//assertTrue(receipt.getTotalAmount() == 74.68);
+			assertTrue(receipt.getSalesTaxes() == 6.70);
+			assertTrue(receipt.getTotalAmount() == 74.68);
 		} catch (AssertionError e) {
 			fail("error test receipt 3");
 		}

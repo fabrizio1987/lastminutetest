@@ -4,7 +4,6 @@ import java.util.List;
 
 public class ReceiptService {
 
-
 	public void processItem(Item item) {
 		if (item.isProcessed()) {
 			System.out.println("Item already processed.");
@@ -17,7 +16,7 @@ public class ReceiptService {
 
 		item.setImportTaxAmount(importTaxAmount);
 		item.setSalesTaxAmount(taxAmount);
-		item.setGrossPrice(Math.floor(grossPrice * 100) / 100);
+		item.setGrossPrice(round(grossPrice));
 		item.setProcessed(true);
 
 	}
@@ -38,20 +37,25 @@ public class ReceiptService {
 			if (!item.isProcessed())
 				processItem(item);
 			
-			taxAmount += roundTo005(item.getImportTaxAmount() + item.getSalesTaxAmount());
+			taxAmount += item.getImportTaxAmount() + item.getSalesTaxAmount();
 			total += item.getGrossPrice();
 			
 		}
 
-		receipt.setSalesTaxes(taxAmount);
-		receipt.setTotalAmount(total);		
+		receipt.setSalesTaxes(roundTo005(taxAmount));
+		receipt.setTotalAmount(round(total));		
 		
 		receipt.setProcessed(true);
 
+	}	
+	
+	public double round(double d) {
+		return Math.round(d * 100.0) / 100.0;
 	}
-
+	
 	private double roundTo005(double d) {
-		return Math.round(d * 20.0) / 20.0;
+		return Math.round(Math.ceil(d * 20.0)) / 20.0;
 	}
+	
 
 }
